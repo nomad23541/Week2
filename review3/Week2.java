@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Month;
 import java.util.Scanner;
 
 public class Week2 {
@@ -92,10 +93,11 @@ public class Week2 {
 	}
 
 	private static String buildReport(String[][] data) {
+		String monthString = Month.of(Integer.parseInt(data[0][0])).name();
 		String format = "%-12s %-5s %-4s %-12s\n";
 		StringBuilder sb = new StringBuilder();
 		sb.append(generateLine(60));
-		sb.append("December 2020: Temperatures in Utah\n");
+		sb.append(monthString + " 2020: Temperatures in Utah\n");
 		sb.append(generateLine(60));
 		sb.append(String.format(format, "Date", "High", "Low", "Variance"));
 		sb.append(generateLine(60));
@@ -133,9 +135,9 @@ public class Week2 {
 		}
 
 		sb.append(generateLine(60));
-		sb.append(String.format("December Highest Temperature: %d/%d: %d Average Hi: %.1f\n", month, highestTempDay,
+		sb.append(String.format("%s Highest Temperature: %d/%d: %d Average Hi: %.1f\n", monthString, month, highestTempDay,
 				highestTemp, (float) avgHigh / data.length));
-		sb.append(String.format("December Lowest Temperature: %d/%d: %d Average Lo: %.1f", month, lowestTempDay, lowestTemp,
+		sb.append(String.format("%s Lowest Temperature: %d/%d: %d Average Lo: %.1f", monthString, month, lowestTempDay, lowestTemp,
 				(float) avgLow / data.length));
 		return sb.toString();
 	}
